@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ARUNIKA — Island Hop Flight</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="game"></canvas>
+
+<!-- ============ HUD (shown once the sortie starts) ============ -->
+<div id="hud" style="display:none">
+  <div id="topbar">
+    <div id="mission-panel" class="panel">
+      <div class="panel-title">SORTIE <span id="mission-count">0/3</span></div>
+      <ul id="mission-list">
+        <li class="active">1 · Ring Run — fly all 5 rings</li>
+        <li>2 · Supply Drop — crate on the yellow circle</li>
+        <li>3 · Island Landing — land on runway 09</li>
+      </ul>
+      <div id="phase-label">ON THE RUNWAY</div>
+    </div>
+
+    <div id="compass-wrap" class="panel">
+      <div id="compass-window">
+        <div id="compass-tape"></div>
+        <div id="compass-needle"></div>
+      </div>
+      <div id="hdg-value">090° E</div>
+    </div>
+
+    <div id="stats-panel" class="panel">
+      <div class="stat"><span>SCORE</span><b id="score-value">0</b></div>
+      <div class="stat"><span>TIME</span><b id="time-value">00:00</b></div>
+      <div class="bar-row"><span>THR</span><div class="bar"><div id="throttle-fill"></div></div><b id="throttle-value">0%</b></div>
+      <div class="bar-row"><span>FUEL</span><div class="bar"><div id="fuel-fill"></div></div><b id="fuel-value">100%</b></div>
+    </div>
+  </div>
+
+  <div id="ring-arrow">➤</div>
+  <div id="ring-dist"></div>
+
+  <div id="bottombar">
+    <div id="instruments" class="panel">
+      <canvas id="horizon" width="120" height="120"></canvas>
+      <div class="big-readouts">
+        <div class="readout"><span>ALTITUDE</span><b><span id="alt-value">0</span> ft</b></div>
+        <div class="readout"><span>AIRSPEED</span><b><span id="spd-value">0</span> kt</b></div>
+        <div class="readout"><span>VERT SPEED</span><b><span id="vsi-value">+0</span> ft/min</b></div>
+      </div>
+    </div>
+
+    <div id="controls" class="panel">
+      <button id="thr-up" title="Throttle up (W)">THR +</button>
+      <button id="thr-down" title="Throttle down (S)">THR −</button>
+      <button id="camera-btn" title="Camera (C)">CAMERA</button>
+      <button id="mute-btn" title="Sound (M)">SOUND ON</button>
+      <button id="restart-btn" title="Restart sortie (R)">RESTART</button>
+    </div>
+  </div>
+
+  <div id="fuel-warning">⚠ LOW FUEL — HEAD FOR THE RUNWAY</div>
+  <div id="hint">Arrows fly · W/S throttle · Mouse steers · Space drops the crate · C camera · R restart</div>
+</div>
+
+<!-- ============ Banner (mission events, landing, crash) ============ -->
+<div id="banner"><div id="banner-title"></div><div id="banner-sub"></div></div>
+
+<!-- ============ Menu ============ -->
+<div id="menu">
+  <div class="menu-inner">
+    <div class="menu-kicker">MAKE.FUN · BEST FLIGHT GAME</div>
+    <h1>ARUNIKA</h1>
+    <div class="menu-sub">Island Hop Flight — one sortie, three jobs, one runway home.</div>
+    <div class="mission-cards">
+      <div class="mission-card"><b>1 · RING RUN</b><span>Thread all 5 sky rings over the island. +250 each.</span></div>
+      <div class="mission-card"><b>2 · SUPPLY DROP</b><span>Drop the crate on the yellow circle by the town. +500.</span></div>
+      <div class="mission-card"><b>3 · ISLAND LANDING</b><span>Bring her down soft on runway 09 and stop. +1,000.</span></div>
+    </div>
+    <button id="start-btn">▶ &nbsp;FLY THE SORTIE</button>
+    <div class="menu-controls">
+      <span><b>↑ ↓ ← →</b> pitch &amp; bank</span>
+      <span><b>W / S</b> throttle</span>
+      <span><b>Mouse</b> steer</span>
+      <span><b>Space</b> drop crate</span>
+      <span><b>C</b> cockpit / chase</span>
+      <span><b>B</b> brake</span>
+    </div>
+    <div class="menu-foot">Watch the fuel gauge. Mind the hills. The sea is not a runway.</div>
+  </div>
+</div>
+
+<script type="module" src="src/game.js"></script>
+</body>
+</html>
